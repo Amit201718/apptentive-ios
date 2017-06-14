@@ -1,3 +1,7 @@
+2017-06-14 frankus v3.2.2
+-------------------------
+Version 3.2.2 fixes a crash in Message Center due to a bug in iOS 8.0. It also fixes a bug where button taps in iOS 7 weren't being recorded for Ratings Prompts, Love Dialogs and Notes. 
+
 2016-08-09 frankus v3.2.1
 -------------------------
 Version 3.2.1 improves stability and reliability and fixes several warnings when
