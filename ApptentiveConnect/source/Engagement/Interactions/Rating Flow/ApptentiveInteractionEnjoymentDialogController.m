@@ -26,6 +26,8 @@ NSString *const ATInteractionEnjoymentDialogEventLabelNo = @"no";
 @property (strong, nonatomic) UIAlertController *alertController;
 @property (strong, nonatomic) UIAlertView *alertView;
 
+@property (strong, nonatomic) ApptentiveInteractionEnjoymentDialogController *cyclicReference;
+
 @end
 
 
@@ -116,6 +118,7 @@ NSString *const ATInteractionEnjoymentDialogEventLabelNo = @"no";
 	}
 
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:self.title message:self.body delegate:self cancelButtonTitle:nil otherButtonTitles:self.noText, self.yesText, nil];
+	self.cyclicReference = self;
 
 	return alertView;
 }
@@ -141,6 +144,8 @@ NSString *const ATInteractionEnjoymentDialogEventLabelNo = @"no";
 			[self.interaction engage:ATInteractionEnjoymentDialogEventLabelYes fromViewController:self.viewController];
 		}
 	}
+
+	self.cyclicReference = nil;
 }
 
 - (void)dealloc {

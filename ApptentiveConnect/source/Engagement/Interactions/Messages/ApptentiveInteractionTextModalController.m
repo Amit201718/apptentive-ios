@@ -27,6 +27,8 @@ typedef void (^alertActionHandler)(UIAlertAction *);
 @property (strong, nonatomic) UIAlertController *alertController;
 @property (strong, nonatomic) UIAlertView *alertView;
 
+@property (strong, nonatomic) ApptentiveInteractionTextModalController *cyclicReference;
+
 @end
 
 
@@ -83,6 +85,8 @@ typedef void (^alertActionHandler)(UIAlertAction *);
 
 		[alertView addButtonWithTitle:buttonTitle];
 	}
+
+	self.cyclicReference = self;
 
 	return alertView;
 }
@@ -265,6 +269,8 @@ typedef void (^alertActionHandler)(UIAlertAction *);
 			}
 		}
 	}
+
+	self.cyclicReference = nil;
 }
 
 - (void)dealloc {
