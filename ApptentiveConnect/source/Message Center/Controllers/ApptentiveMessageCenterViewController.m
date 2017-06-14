@@ -113,6 +113,8 @@ typedef NS_ENUM(NSInteger, ATMessageCenterState) {
 
 @property (assign, nonatomic) CGRect lastKnownKeyboardRect;
 
+@property (assign, nonatomic) BOOL isNotiOS8_0;
+
 @end
 
 
@@ -264,6 +266,8 @@ typedef NS_ENUM(NSInteger, ATMessageCenterState) {
 	self.greetingView.orientation = interfaceOrientation;
 	self.profileView.orientation = interfaceOrientation;
 	self.messageInputView.orientation = interfaceOrientation;
+
+	self.isNotiOS8_0 = ![[NSProcessInfo processInfo] respondsToSelector:@selector(isOperatingSystemAtLeastVersion:)] || [[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){8, 1, 0}];
 }
 
 - (void)dealloc {
@@ -519,7 +523,9 @@ typedef NS_ENUM(NSInteger, ATMessageCenterState) {
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
 	UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
-	headerView.textLabel.font = [[Apptentive sharedConnection].styleSheet fontForStyle:ApptentiveTextStyleMessageDate];
+	if (self.isNotiOS8_0) {
+		headerView.textLabel.font = [[Apptentive sharedConnection].styleSheet fontForStyle:ApptentiveTextStyleMessageDate];
+	}
 	headerView.textLabel.textColor = [[Apptentive sharedConnection].styleSheet colorForStyle:ApptentiveTextStyleMessageDate];
 }
 
