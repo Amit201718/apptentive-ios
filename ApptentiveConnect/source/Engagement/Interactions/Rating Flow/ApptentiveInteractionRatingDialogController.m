@@ -27,6 +27,8 @@ NSString *const ATInteractionRatingDialogEventLabelDecline = @"decline";
 @property (strong, nonatomic) UIAlertController *alertController;
 @property (strong, nonatomic) UIAlertView *alertView;
 
+@property (strong, nonatomic) ApptentiveInteractionRatingDialogController *cyclicReference;
+
 @end
 
 
@@ -120,6 +122,7 @@ NSString *const ATInteractionRatingDialogEventLabelDecline = @"decline";
 	}
 
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:self.title message:self.body delegate:self cancelButtonTitle:self.declineText otherButtonTitles:self.rateText, self.remindText, nil];
+	self.cyclicReference = self;
 
 	return alertView;
 }
@@ -142,6 +145,8 @@ NSString *const ATInteractionRatingDialogEventLabelDecline = @"decline";
 			[self.interaction engage:ATInteractionRatingDialogEventLabelDecline fromViewController:self.viewController];
 		}
 	}
+
+	self.cyclicReference = nil;
 }
 
 - (void)dealloc {
